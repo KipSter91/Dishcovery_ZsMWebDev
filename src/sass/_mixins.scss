@@ -1,0 +1,11 @@
+@use 'variables' as *;
+
+@mixin theme-light {
+  color: $color-grey-dark-1;
+  background: $gradient;
+}
+
+@mixin theme-dark {
+  color: $dark-text;
+  background: $gradient-dark;
+}

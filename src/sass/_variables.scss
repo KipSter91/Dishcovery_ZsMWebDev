@@ -1,0 +1,27 @@
+// === Light Theme Colors ===
+$color-primary: #43A047 !default;         // Rich green, harmonikusabb mint #4CAF50
+$color-grad-1: #C5E1A5 !default;          // Light avocado green
+$color-grad-2: #81C784 !default;          // Mid green, jól átmegy sötétbe is
+
+$color-grey-light-1: #F1F8E9 !default;    // Soft greenish background
+$color-grey-light-2: #DCEDC8 !default;    // Light lines, boxes
+$color-grey-light-3: #A5D6A7 !default;    // Placeholder text
+$color-grey-dark-1: #2E7D32 !default;     // Main dark text
+$color-grey-dark-2: #558B2F !default;     // Lighter heading/subtext
+
+// === Gradient ===
+$gradient: linear-gradient(to right bottom, $color-grad-1, $color-grad-2) !default;
+
+// === Dark Theme Colors ===
+$dark-primary: #66BB6A !default;
+$dark-bg: #1A1A1A !default;
+$dark-surface: #263238 !default;
+$dark-text: #C8E6C9 !default;
+$dark-grey: #4CAF50 !default;
+$gradient-dark: linear-gradient(to right bottom, #388E3C, #1B5E20) !default;
+
+// === Breakpoints ===
+$bp-large: 78.15em !default; // 1250px
+$bp-medium: 61.25em !default; // 980px
+$bp-small: 37.5em !default; // 600px
+$bp-smallest: 31.25em !default; // 500px
