@@ -11,29 +11,14 @@
     position: relative;
     // transform: scale(1.04) translateY(-1px);
     transform-origin: top;
-
-    &::before {
-      content: '';
-      display: block;
-      height: 100%;
-      width: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
-      background-image: linear-gradient(
-        to right bottom,
-        $color-grad-1,
-        $color-grad-2
-      );
-      opacity: 0.6;
-    }
   }
-
+  
   &__img {
     width: 100%;
     display: block;
     height: 100%;
     object-fit: cover;
+    filter: blur(5);
   }
 
   &__title {
@@ -50,6 +35,7 @@
     text-align: center;
 
     span {
+      border-radius:30px 10px 30px 10px;
       -webkit-box-decoration-break: clone;
       box-decoration-break: clone;
       padding: 1.3rem 2rem;
