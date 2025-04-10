@@ -22,6 +22,7 @@ export const loadRecipe = async (id) => {
       title: recipe.title,
     };
   } catch (err) {
-    console.error(err);
+    console.error(`☠️${err}☠️`);
+    throw err;
   }
 };

@@ -18,9 +18,13 @@ html {
 
 body {
   display: flex;
+  justify-content: center;
+  align-items: flex-start;
   font-family: "Nunito Sans", sans-serif;
   font-weight: 400;
   line-height: 1.6;
+  min-height: 100vh;
+  padding: 4vw;
   @include theme-light;
 
   &.dark {
@@ -29,14 +33,14 @@ body {
 
   background-size: cover;
   background-repeat: no-repeat;
-  min-height: 100vh;
 }
 
 .container {
   max-width: 120rem;
-  margin: 4vw auto;
+  width: 100%;
   background-color: #fff;
-  border-radius: 1rem;
+  border-radius: 2rem;
+  overflow: hidden;
   box-shadow: 0 2rem 6rem 0.5rem rgba($color-grey-dark-1, 0.2);
 
   display: grid;
@@ -53,6 +57,5 @@ body {
       "list"
       "recipe";
     margin: 0;
-    border-radius: 0;
   }
 }

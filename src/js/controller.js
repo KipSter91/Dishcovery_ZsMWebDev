@@ -1,5 +1,5 @@
-import * as model from "./model.js";
-import recipeView from "./views/recipeView.js";
+import * as model from "./model";
+import recipeView from "./views/recipeView";
 
 import "core-js/actual";
 import "regenerator-runtime/runtime.js";
@@ -19,7 +19,8 @@ const controlRecipe = async function () {
     //Redering recipe
     recipeView.render(model.state.recipe);
   } catch (err) {
-    console.error(err);
+    console.error(`☠️${err}☠️`);
+    recipeView.renderError();
   }
 };
 
