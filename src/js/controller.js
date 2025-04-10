@@ -1,5 +1,6 @@
 import * as model from "./model";
 import recipeView from "./views/recipeView";
+import navigationView from "./views/navigationView";
 
 import "core-js/actual";
 import "regenerator-runtime/runtime.js";
@@ -26,6 +27,7 @@ const controlRecipe = async function () {
 
 const init = () => {
   recipeView.addHandleRender(controlRecipe);
+  // NavigationView is automatically initialized through its constructor
 };
 
 init();

@@ -6,11 +6,24 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 0 2rem;
+  position: relative;
 
   &__logo {
-    margin-left: 4rem;
-    height: 10rem;
+    margin-left: 2rem;
+    height: 5rem;
     display: block;
+
+    @media only screen and (max-width: $bp-small) {
+      margin-left: 0;
+      height: 4rem;
+    }
+  }
+
+  @media only screen and (max-width: $bp-medium) {
+    flex-wrap: wrap;
+    row-gap: 1rem;
+    padding: 1.5rem;
   }
 }
 
@@ -21,6 +34,9 @@
   align-items: center;
   padding-left: 3rem;
   transition: all 0.3s;
+  flex-grow: 1;
+  max-width: 50rem;
+  margin: 0 2rem;
 
   &:focus-within {
     transform: translateY(-2px);
@@ -33,7 +49,7 @@
     font-family: inherit;
     color: inherit;
     font-size: 1.7rem;
-    width: 30rem;
+    width: 100%;
 
     &:focus {
       outline: none;
@@ -44,10 +60,12 @@
     }
 
     @media only screen and (max-width: $bp-medium) {
-      width: auto;
+      font-size: 1.5rem;
+    }
 
+    @media only screen and (max-width: $bp-small) {
       &::placeholder {
-        color: white;
+        font-size: 1.4rem;
       }
     }
   }
@@ -55,6 +73,72 @@
   &__btn {
     font-weight: 600;
     font-family: inherit;
+
+    @media only screen and (max-width: $bp-small) {
+      padding: 1rem 2rem;
+
+      span {
+        display: none;
+      }
+    }
+  }
+
+  @media only screen and (max-width: $bp-medium) {
+    order: 1;
+    width: 100%;
+    margin: 0;
+    max-width: none;
+  }
+}
+
+// Hamburger Menu Icon
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1001; /* Increased z-index to be above the nav panel */
+  position: relative;
+
+  &__line {
+    width: 100%;
+    height: 3px;
+    background-color: $color-grey-dark-1;
+    transition: all 0.3s linear;
+    position: relative;
+    transform-origin: 1px;
+    border-radius: 10px;
+  }
+
+  // Animation for hamburger to X
+  &.active {
+    position: fixed;
+    top: 3.2rem;
+    right: 2rem;
+
+    .hamburger__line {
+      background-color: $color-grey-dark-1; /* Restore original color */
+
+      &:nth-child(1) {
+        transform: rotate(45deg);
+      }
+      &:nth-child(2) {
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+      &:nth-child(3) {
+        transform: rotate(-45deg);
+      }
+    }
+  }
+
+  @media only screen and (max-width: $bp-small) {
+    display: flex;
   }
 }
 
@@ -104,6 +188,67 @@
       background-color: $color-grey-light-2;
     }
   }
+
+  @media only screen and (max-width: $bp-small) {
+    position: fixed;
+    top: 0;
+    right: -30rem;
+    height: 100vh;
+    width: 30rem;
+    background-color: $color-grey-light-1; /* Restore original light color */
+    box-shadow: -2px 0 5px rgba($color-grey-dark-1, 0.1);
+    z-index: 1000;
+    transition: right 0.3s ease-in-out;
+    margin-right: 0;
+
+    &.nav-open {
+      right: 0;
+    }
+
+    &__list {
+      flex-direction: column;
+      padding-top: 10rem;
+      height: auto;
+    }
+
+    &__item {
+      width: 100%;
+    }
+
+    &__btn {
+      width: 100%;
+      padding: 2rem 3rem;
+      justify-content: flex-start;
+      color: inherit; /* Restore original color */
+
+      svg {
+        fill: $color-primary; /* Restore original icon color */
+      }
+
+      &:hover {
+        background-color: $color-grey-light-2; /* Restore original hover color */
+      }
+    }
+  }
+}
+
+// Overlay for mobile menu
+.nav-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.3s;
+
+  &.active {
+    visibility: visible;
+    opacity: 1;
+  }
 }
 
 .bookmarks {
@@ -115,10 +260,16 @@
   width: 40rem;
   background-color: #fff;
   box-shadow: 0 0.8rem 5rem 2rem rgba($color-grey-dark-1, 0.1);
-
+  border-radius: 1rem;
   visibility: hidden;
   opacity: 0;
   transition: all 0.5s 0.2s;
+
+  // Class for mobile visibility (triggered by JS click instead of hover)
+  &.bookmarks-visible {
+    visibility: visible;
+    opacity: 1;
+  }
 
   &__list {
     list-style: none;
@@ -142,5 +293,40 @@
   .nav__btn--bookmarks:hover + & {
     visibility: visible;
     opacity: 1;
+  }
+
+  & .message {
+    padding: 3rem 2rem;
+
+    @media only screen and (max-width: $bp-small) {
+      p {
+        font-size: 1.6rem;
+      }
+    }
+  }
+
+  @media only screen and (max-width: $bp-medium) {
+    width: 30rem;
+  }
+
+  @media only screen and (max-width: $bp-small) {
+    position: static;
+    width: 90%;
+    margin: 0 auto;
+    box-shadow: none;
+    border-radius: 0.5rem;
+    background-color: rgba(255, 255, 255, 0.9);
+
+    & .message {
+      padding: 2rem;
+
+      svg {
+        fill: $color-primary;
+      }
+
+      p {
+        color: $color-grey-dark-1;
+      }
+    }
   }
 }

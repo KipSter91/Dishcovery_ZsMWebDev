@@ -1,5 +1,5 @@
-@use 'variables' as *;
-@use 'sass:color';
+@use "variables" as *;
+@use "sass:color";
 
 .recipe {
   background-color: $color-grey-light-1;
@@ -11,8 +11,12 @@
     position: relative;
     // transform: scale(1.04) translateY(-1px);
     transform-origin: top;
+
+    @media only screen and (max-width: $bp-small) {
+      height: 25rem;
+    }
   }
-  
+
   &__img {
     width: 100%;
     display: block;
@@ -35,7 +39,7 @@
     text-align: center;
 
     span {
-      border-radius:30px 10px 30px 10px;
+      border-radius: 30px 10px 30px 10px;
       -webkit-box-decoration-break: clone;
       box-decoration-break: clone;
       padding: 1.3rem 2rem;
@@ -48,6 +52,19 @@
 
     @media only screen and (max-width: $bp-medium) {
       width: 70%;
+      font-size: 2.75rem;
+    }
+
+    @media only screen and (max-width: $bp-small) {
+      width: 80%;
+      font-size: 2.25rem;
+      transform: translate(-50%, 20%) skewY(-4deg);
+    }
+
+    @media only screen and (max-width: $bp-smallest) {
+      width: 90%;
+      font-size: 2rem;
+      transform: translate(-50%, 20%) skewY(-3deg);
     }
   }
 
@@ -57,6 +74,20 @@
     display: flex;
     align-items: center;
     padding: 7.5rem 8rem 3.5rem 8rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+
+    @media only screen and (max-width: $bp-medium) {
+      padding: 6rem 6rem 3rem;
+    }
+
+    @media only screen and (max-width: $bp-small) {
+      padding: 4rem 4rem 2rem;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
   }
 
   &__info {
@@ -67,6 +98,18 @@
 
     &:not(:last-child) {
       margin-right: 4.5rem;
+
+      @media only screen and (max-width: $bp-medium) {
+        margin-right: 3rem;
+      }
+
+      @media only screen and (max-width: $bp-small) {
+        margin-right: 0.5rem;
+      }
+    }
+
+    @media only screen and (max-width: $bp-small) {
+      font-size: 1.5rem;
     }
   }
 
@@ -88,6 +131,18 @@
     transform: translateY(-1px);
   }
 
+  &__user-buttons {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+
+    @media only screen and (max-width: $bp-small) {
+      margin-left: 0;
+      display: flex;
+      align-items: center;
+    }
+  }
+
   &__user-generated {
     background-color: color.adjust($color-grey-light-2, $lightness: 2%);
 
@@ -98,13 +153,18 @@
     width: 4rem;
     border-radius: 10rem;
 
-    margin-left: auto;
     margin-right: 1.75rem;
 
     svg {
       height: 2.25rem;
       width: 2.25rem;
       fill: $color-primary;
+    }
+
+    @media only screen and (max-width: $bp-small) {
+      margin-right: 0.2rem;
+      height: 3.5rem;
+      width: 3.5rem;
     }
   }
 
@@ -118,6 +178,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    @media only screen and (max-width: $bp-medium) {
+      padding: 4rem 6rem;
+    }
+
+    @media only screen and (max-width: $bp-small) {
+      padding: 3rem 4rem;
+      font-size: 1.5rem;
+    }
   }
 
   &__ingredient-list {
@@ -125,6 +194,11 @@
     grid-template-columns: 1fr 1fr;
     gap: 2.5rem 3rem;
     list-style: none;
+
+    @media only screen and (max-width: $bp-small) {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
   }
 
   &__ingredient {
@@ -153,6 +227,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    @media only screen and (max-width: $bp-medium) {
+      padding: 4rem 6rem;
+    }
+
+    @media only screen and (max-width: $bp-small) {
+      padding: 3rem 4rem;
+    }
   }
 
   &__directions-text {
@@ -160,6 +242,11 @@
     text-align: center;
     margin-bottom: 3.5rem;
     color: $color-grey-dark-2;
+
+    @media only screen and (max-width: $bp-small) {
+      font-size: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
   }
 
   &__publisher {
