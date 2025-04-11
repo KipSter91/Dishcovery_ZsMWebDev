@@ -1,10 +1,15 @@
 import * as model from "./model";
 import recipeView from "./views/recipeView";
 import searchView from "./views/searchView";
+import resultsView from "./views/resultsView";
 import navigationView from "./views/navigationView";
 
 import "core-js/actual";
 import "regenerator-runtime/runtime.js";
+
+if (module.hot) {
+  module.hot.accept();
+}
 
 const controlRecipe = async function () {
   try {
@@ -27,23 +32,31 @@ const controlRecipe = async function () {
 };
 
 const controlSearchResults = async function () {
+  resultsView.renderLoader();
+  // console.log(resultsView);
+
   try {
     const query = searchView.getQuery();
-    if (!query) return;
+    if (!query)
+      return resultsView.renderError(
+        "We couldn't process your search because no search term was entered. Please type something in the search bar and try again!"
+      );
 
-
-
-    //Loading serch results
+    //Loading search results
     await model.loadSearchResult(query);
+
+    //Render results
+    // console.log(model.state.search.results);
+    resultsView.render(model.state.search.results);
   } catch (err) {
     console.error(`☠️${err}☠️`);
-    // searchView.renderError();
   }
 };
 
 const init = () => {
   recipeView.addHandlerRender(controlRecipe);
   searchView.addHandlerSearch(controlSearchResults);
+  navigationView.init();
 };
 
 init();
