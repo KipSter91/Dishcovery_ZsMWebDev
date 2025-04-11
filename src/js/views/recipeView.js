@@ -14,7 +14,7 @@ class RecipeView {
   #generateMarkup() {
     return `
     <figure class="recipe__fig">
-<img src="${this.#data.imageUrl}" alt="${
+<img src="${this.#data.image}" alt="${
       this.#data.title
     }" class="recipe__img" />
 <h1 class="recipe__title">
@@ -84,10 +84,10 @@ ${this.#data.ingredients.reduce(this.#generateMarkupIngredient.bind(this), "")}
   <span class="recipe__publisher">${
     this.#data.publisher
   }</span>. Please check out
-  directions at their websi</p>
+  directions at their website.</p>
 <a
   class="btn--small recipe__btn"
-  href=${this.#data.sourceUrl}
+  href=${this.#data.source}
   target="_blank"
 >
   <span>Directions</span>
@@ -158,7 +158,7 @@ ${this.#data.ingredients.reduce(this.#generateMarkupIngredient.bind(this), "")}
     this.#clear();
     this.#parentElement.insertAdjacentHTML("afterbegin", markup);
   }
-  addHandleRender(handler) {
+  addHandlerRender(handler) {
     ["hashchange", "load"].forEach((ev) =>
       window.addEventListener(ev, handler)
     );

@@ -7,12 +7,22 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 2rem;
-  position: relative;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  margin: 0 auto;
+  max-width: 120rem;
 
   &__logo {
     margin-left: 2rem;
     height: 5rem;
     display: block;
+
+    @media only screen and (max-width: $bp-medium) and (min-width: $bp-small + 0.01em) {
+      height: 4.5rem;
+      margin-left: 1rem;
+    }
 
     @media only screen and (max-width: $bp-small) {
       margin-left: 0;
@@ -21,9 +31,21 @@
   }
 
   @media only screen and (max-width: $bp-medium) {
-    flex-wrap: wrap;
-    row-gap: 1rem;
-    padding: 1.5rem;
+    flex-wrap: nowrap; /* Keep everything in one line */
+    padding: 1rem 2rem;
+    max-width: 100%; /* Ensure header takes full width */
+  }
+
+  @media only screen and (max-width: $bp-small) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.5rem 2.5rem; /* Increased padding from 1rem 2rem to 1.5rem 2.5rem */
+    max-width: none;
   }
 }
 
@@ -74,8 +96,19 @@
     font-weight: 600;
     font-family: inherit;
 
+    /* Icon-only for medium screens between 601px and 1076px */
+    @media only screen and (max-width: $bp-medium) and (min-width: $bp-small + 0.01em) {
+      padding: 0.8rem 1.5rem;
+      margin-left: auto;
+
+      span {
+        display: none;
+      }
+    }
+
     @media only screen and (max-width: $bp-small) {
-      padding: 1rem 2rem;
+      padding: 0.8rem 1.5rem;
+      margin-left: auto;
 
       span {
         display: none;
@@ -83,11 +116,22 @@
     }
   }
 
-  @media only screen and (max-width: $bp-medium) {
-    order: 1;
-    width: 100%;
-    margin: 0;
-    max-width: none;
+  @media only screen and (max-width: $bp-medium) and (min-width: $bp-small + 0.01em) {
+    order: 0;
+    width: 20rem;
+    min-width: 20rem;
+    flex: auto;
+    margin: 0 1rem;
+    padding-left: 1.5rem;
+  }
+
+  @media only screen and (max-width: $bp-small) {
+    order: 0;
+    width: 18rem;
+    min-width: 18rem;
+    flex: auto;
+    margin: 0 1rem;
+    padding-left: 1.5rem;
   }
 }
 
@@ -117,9 +161,10 @@
 
   // Animation for hamburger to X
   &.active {
-    position: fixed;
-    top: 3.2rem;
-    right: 2rem;
+    // Remove position: fixed to keep the hamburger in place
+    // position: fixed;
+    // top: 2rem;
+    // right: 1rem;
 
     .hamburger__line {
       background-color: $color-grey-dark-1; /* Restore original color */
@@ -139,6 +184,9 @@
 
   @media only screen and (max-width: $bp-small) {
     display: flex;
+    margin-right: 0;
+    position: relative;
+    z-index: 1001;
   }
 }
 
@@ -180,6 +228,19 @@
       transform: translateY(-1px);
     }
 
+    /* For screens between 601px and 1076px, show only icons */
+    @media only screen and (max-width: $bp-medium) and (min-width: $bp-small + 0.01em) {
+      padding: 0 0.8rem;
+
+      svg {
+        margin-right: 0;
+      }
+
+      span {
+        display: none;
+      }
+    }
+
     &:focus {
       outline: none;
     }
@@ -187,6 +248,11 @@
     &:hover {
       background-color: $color-grey-light-2;
     }
+  }
+
+  /* For screens between 601px and 1076px, adjust nav margin */
+  @media only screen and (max-width: $bp-medium) and (min-width: $bp-small + 0.01em) {
+    margin-right: 1rem;
   }
 
   @media only screen and (max-width: $bp-small) {
@@ -223,6 +289,11 @@
 
       svg {
         fill: $color-primary; /* Restore original icon color */
+        margin-right: 0.7rem;
+      }
+
+      span {
+        display: inline;
       }
 
       &:hover {

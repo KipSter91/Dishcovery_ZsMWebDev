@@ -10,6 +10,7 @@
 
 html {
   font-size: 62.5%;
+  scrollbar-gutter: stable;
 
   @media only screen and (max-width: $bp-medium) {
     font-size: 50%;
@@ -33,6 +34,11 @@ body {
 
   background-size: cover;
   background-repeat: no-repeat;
+  overflow-y: scroll; // Always show scrollbar
+
+  @media only screen and (max-width: $bp-medium) {
+    padding: 0; // Remove padding at medium breakpoint for full screen
+  }
 }
 
 .container {
@@ -44,18 +50,32 @@ body {
   box-shadow: 0 2rem 6rem 0.5rem rgba($color-grey-dark-1, 0.2);
 
   display: grid;
-  grid-template-rows: 10rem minmax(100rem, auto);
+  grid-template-rows: 10rem minmax(50rem, auto);
   grid-template-columns: 1fr 2fr;
   grid-template-areas:
     "head head"
-    "list recipe";
+    "list recipe"; // Removed pagination from main grid template
 
   @media only screen and (max-width: $bp-large) {
     grid-template-columns: 1fr;
     grid-template-areas:
       "head"
       "list"
-      "recipe";
+      "recipe"; // Removed pagination from large breakpoint grid
     margin: 0;
+    overflow: hidden;
+  }
+
+  @media only screen and (max-width: $bp-medium) {
+    max-width: 100%;
+    border-radius: 0; // Remove border radius for full-width appearance
+    box-shadow: none; // Remove shadow for full-width appearance
+    grid-template-rows: 10rem auto auto auto; // Added a row for pagination
+  }
+
+  @media only screen and (max-width: $bp-smallest) {
+    min-height: 100vh; // Ensure it fills the viewport height
+    display: flex; // Switch to flexbox for better content distribution
+    flex-direction: column; // Stack elements vertically
   }
 }

@@ -1,5 +1,6 @@
 import * as model from "./model";
 import recipeView from "./views/recipeView";
+import searchView from "./views/searchView";
 import navigationView from "./views/navigationView";
 
 import "core-js/actual";
@@ -25,9 +26,24 @@ const controlRecipe = async function () {
   }
 };
 
+const controlSearchResults = async function () {
+  try {
+    const query = searchView.getQuery();
+    if (!query) return;
+
+
+
+    //Loading serch results
+    await model.loadSearchResult(query);
+  } catch (err) {
+    console.error(`☠️${err}☠️`);
+    // searchView.renderError();
+  }
+};
+
 const init = () => {
-  recipeView.addHandleRender(controlRecipe);
-  // NavigationView is automatically initialized through its constructor
+  recipeView.addHandlerRender(controlRecipe);
+  searchView.addHandlerSearch(controlSearchResults);
 };
 
 init();
