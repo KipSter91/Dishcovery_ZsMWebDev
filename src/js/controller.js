@@ -12,11 +12,24 @@ if (module.hot) {
   module.hot.accept();
 }
 
+// UI elements to hide initially
+const searchResultsEl = document.querySelector(".search-results");
+const containerEl = document.querySelector(".container");
+let hasInteracted = false;
+
 const controlRecipe = async function () {
   try {
     const id = window.location.hash.replace("#", "");
     // console.log(id);
     if (!id) return;
+
+    // Show search results container once a recipe is selected
+    if (searchResultsEl.classList.contains("hidden-initially")) {
+      searchResultsEl.classList.remove("hidden-initially");
+      // Remove initial state from container
+      containerEl.classList.remove("initial-state");
+    }
+    hasInteracted = true;
 
     //Rendering loader (bouncing dots)
     recipeView.renderLoader();
@@ -26,6 +39,9 @@ const controlRecipe = async function () {
 
     //Redering recipe
     recipeView.render(model.state.recipe);
+
+    // Initialize image blur handler
+    recipeView.addHandlerImageBlur();
   } catch (err) {
     console.error(`☠️${err}☠️`);
     recipeView.renderError();
@@ -33,6 +49,14 @@ const controlRecipe = async function () {
 };
 
 const controlSearchResults = async function () {
+  // Show search results container once a search is performed
+  if (searchResultsEl.classList.contains("hidden-initially")) {
+    searchResultsEl.classList.remove("hidden-initially");
+    // Remove initial state from container
+    containerEl.classList.remove("initial-state");
+  }
+  hasInteracted = true;
+
   resultsView.renderLoader();
   // console.log(resultsView);
 
@@ -61,12 +85,32 @@ const controlPagination = (nextPage) => {
   // console.log(nextPage);
   resultsView.render(model.getSearchResultsPage(nextPage));
 
-    //Render inital pagination buttons
-    paginationView.render(model.state.search);
+  //Render inital pagination buttons
+  paginationView.render(model.state.search);
+};
 
+const setupInitialUI = () => {
+  // Hide search results initially
+  searchResultsEl.classList.add("hidden-initially");
+
+  // Add initial-state class to container for better grid layout
+  containerEl.classList.add("initial-state");
+
+  // Update welcome message with food emoji
+  const recipeContainer = document.querySelector(".recipe");
+  recipeContainer.innerHTML = `
+    <div class="message message--welcome">
+      <div class="message__emoji">🍳</div>
+      <p>Ready to discover something delicious? Start searching!</p>
+    </div>
+  `;
 };
 
 const init = () => {
+  // Set up initial UI state
+  setupInitialUI();
+
+  // Initialize app components
   navigationView.init();
   recipeView.addHandlerRender(controlRecipe);
   searchView.addHandlerSearch(controlSearchResults);

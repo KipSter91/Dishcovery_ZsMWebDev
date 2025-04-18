@@ -5,6 +5,7 @@
   display: flex;
   flex-direction: column;
   grid-area: list; // Assign to list grid area
+  position: relative; // Add position relative to contain absolute positioned pagination
 
   @media only screen and (max-width: $bp-small) {
     padding: 7rem 0 2rem; // Added top padding to account for fixed header
@@ -42,10 +43,18 @@
 
   @media only screen and (max-width: $bp-large) {
     max-height: 50vh;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    padding: 0 1rem;
   }
 
   @media only screen and (max-width: $bp-medium) {
     max-height: none;
+  }
+
+  @media only screen and (max-width: $bp-small) {
+    grid-template-columns: 1fr; // Back to single column on very small screens
   }
 }
 
@@ -53,8 +62,9 @@
   margin-top: auto;
   padding: 0 3.5rem;
   display: flex;
-  justify-content: space-between;
-  min-height: 5rem; // Give minimum height even when empty
+  justify-content: space-between; // Change back to space-between but with more padding
+  min-height: 5rem;
+  position: relative; // Position relative for absolute positioning of buttons on smaller screens
 
   &::after {
     content: "";
@@ -63,17 +73,88 @@
   }
 
   &__btn {
+    min-width: 12rem;
+    text-align: center;
+    margin: 0 2rem; // Add horizontal margins for better spacing
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     &--prev {
       float: left;
     }
     &--next {
       float: right;
     }
+
+    svg {
+      flex-shrink: 0; // Prevent SVG from shrinking
+    }
+
+    span {
+      display: inline-block;
+      margin: 0 0.5rem; // Add some space between text and icons
+    }
+  }
+
+  &__placeholder {
+    min-width: 12rem;
+  }
+
+  @media only screen and (max-width: $bp-large) {
+    position: absolute; // Position absolutely on smaller screens
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    padding: 0; // Remove padding
+    margin: 0; // Remove margin
+    pointer-events: none; // Make the container not catch clicks
+    justify-content: center; // Center for placing elements at sides
+    align-items: center;
+    background: transparent;
+    z-index: 5;
+
+    &__btn {
+      position: absolute;
+      min-width: auto; // Remove min-width
+      margin: 0; // Remove margin
+      padding: 1rem; // Add some padding
+      background-color: rgba(255, 255, 255, 0.7); // Semi-transparent background
+      border-radius: 50%; // Make circular
+      width: 4.5rem;
+      height: 4.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      pointer-events: auto; // Allow button clicks
+
+      span {
+        display: none; // Hide text on small screens
+      }
+
+      &--prev {
+        left: 1rem;
+      }
+
+      &--next {
+        right: 1rem;
+      }
+
+      svg {
+        height: 2.5rem;
+        width: 2.5rem;
+      }
+    }
+
+    &__placeholder {
+      display: none; // Hide placeholder on small screens
+    }
   }
 
   @media only screen and (max-width: $bp-small) {
-    padding: 0 2rem;
-    margin: 1.5rem 0;
+    padding: 0;
+    margin: 0;
   }
 }
 

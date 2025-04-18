@@ -29,7 +29,7 @@ class NavigationView {
   _addHandlerCloseOnClick() {
     this._nav.addEventListener("click", (e) => {
       const navBtn = e.target.closest(".nav__btn");
-      if (!navBtn || navBtn.classList.contains("nav__btn--bookmarks")) return;
+      if (!navBtn) return;
 
       if (window.innerWidth <= 600) {
         this._nav.classList.remove("nav-open");
@@ -65,6 +65,7 @@ class NavigationView {
       }
     });
   }
+
   init() {
     this._addHandlerMobileMenu();
     this._addHandlerCloseOnClick();

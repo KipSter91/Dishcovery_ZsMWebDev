@@ -31,7 +31,20 @@
     display: block;
     height: 100%;
     object-fit: cover;
-    filter: blur(5);
+    filter: blur(5px);
+    transition: filter 0.3s ease;
+
+    // Remove blur effect on hover for desktop devices
+    @media (hover: hover) {
+      &:hover {
+        filter: blur(0);
+      }
+    }
+
+    // Class to be toggled via JS for mobile devices
+    &.no-blur {
+      filter: blur(0);
+    }
   }
 
   &__title {

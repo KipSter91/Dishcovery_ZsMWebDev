@@ -111,6 +111,39 @@ ${this._data.ingredients.reduce(this._generateMarkupIngredient.bind(this), "")}
       window.addEventListener(ev, handler)
     );
   }
+
+  // Add function to handle image blur toggling
+  addHandlerImageBlur() {
+    // This is set up after content is rendered
+    this._parentElement.addEventListener("click", (e) => {
+      const img = e.target.closest(".recipe__img");
+
+      // If the click was on the image
+      if (img) {
+        // Toggle the no-blur class
+        img.classList.toggle("no-blur");
+        e.stopPropagation(); // Prevent triggering document listener immediately
+      }
+    });
+
+    // Add event listener to document to remove no-blur class when clicking elsewhere
+    document.addEventListener("click", (e) => {
+      const img = this._parentElement.querySelector(".recipe__img");
+      const clickedOutsideApp =
+        !e.target.closest(".recipe") &&
+        !e.target.closest(".search-results") &&
+        !e.target.closest(".header");
+
+      // Don't do anything if we don't have an image or clicked within the app components
+      if (!img || clickedOutsideApp) return;
+
+      // Remove the no-blur class when clicking elsewhere in the app
+      // Only if the image has the no-blur class
+      if (img.classList.contains("no-blur")) {
+        img.classList.remove("no-blur");
+      }
+    });
+  }
 }
 
 export default new RecipeView();
