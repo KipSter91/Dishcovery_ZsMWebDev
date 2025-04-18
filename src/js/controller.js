@@ -23,6 +23,19 @@ const isMobileDevice = function () {
   return window.innerWidth <= 600; // Using the same breakpoint as in navigationView
 };
 
+// Helper function to hide search results when only showing a recipe
+const hideSearchResultsForDirectRecipe = function () {
+  // If there are no search results (page was refreshed with recipe hash)
+  // and we have a recipe ID, hide the search results panel
+  if (model.state.search.results.length === 0 && window.location.hash) {
+    searchResultsEl.classList.add("hidden");
+    containerEl.classList.add("recipe-only");
+  } else {
+    searchResultsEl.classList.remove("hidden");
+    containerEl.classList.remove("recipe-only");
+  }
+};
+
 // Helper function to scroll to recipe div smoothly
 const scrollToRecipe = function () {
   if (isMobileDevice()) {
@@ -79,6 +92,9 @@ const controlRecipe = async function () {
 
     // Scroll to recipe on mobile devices
     scrollToRecipe();
+
+    // Hide search results if directly showing a recipe
+    hideSearchResultsForDirectRecipe();
   } catch (err) {
     console.error(`☠️${err}☠️`);
     recipeView.renderError();
@@ -189,6 +205,11 @@ const controlSearchResults = async function () {
     // Remove initial state from container
     containerEl.classList.remove("initial-state");
   }
+
+  // Make sure search results are visible (in case they were hidden for direct recipe view)
+  searchResultsEl.classList.remove("hidden");
+  containerEl.classList.remove("recipe-only");
+
   hasInteracted = true;
 
   resultsView.renderLoader();

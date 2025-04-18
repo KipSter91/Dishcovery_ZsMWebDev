@@ -53,6 +53,11 @@ body {
   padding: 0;
 }
 
+// Hidden class for dynamic hiding (like when viewing a recipe directly)
+.hidden {
+  display: none !important;
+}
+
 // Enhanced message styling for initial view
 .message--welcome {
   display: flex;
@@ -91,6 +96,20 @@ body {
     grid-template-areas:
       "head"
       "recipe";
+  }
+
+  // Recipe-only layout when viewing a recipe directly without search
+  &.recipe-only {
+    grid-template-rows: 10rem minmax(50rem, auto);
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "head"
+      "recipe";
+
+    .recipe {
+      width: 100%;
+      max-width: 100%;
+    }
   }
 
   @media only screen and (max-width: $bp-large) {
