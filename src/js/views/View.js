@@ -26,24 +26,31 @@ export default class View {
 
     // Compare and update changed elements
     newElements.forEach((newEl, i) => {
+      // Check if current element exists at this index
+      if (i >= curElements.length) return;
+
       const curEl = curElements[i];
 
-      // Skip if elements don't match (safety check)
-      if (!curEl) return;
+      // Skip if elements don't match in terms of nodeName/type
+      if (newEl.nodeName !== curEl.nodeName) return;
 
       // Update changed TEXT
       if (
         !newEl.isEqualNode(curEl) &&
-        newEl.firstChild?.nodeValue?.trim() !== ""
+        newEl.firstChild?.nodeValue?.trim() !== "" &&
+        newEl.firstChild?.nodeType === Node.TEXT_NODE
       ) {
         curEl.textContent = newEl.textContent;
       }
 
       // Update changed ATTRIBUTES
       if (!newEl.isEqualNode(curEl)) {
-        Array.from(newEl.attributes).forEach((attr) =>
-          curEl.setAttribute(attr.name, attr.value)
-        );
+        Array.from(newEl.attributes).forEach((attr) => {
+          // Only update attributes that actually changed
+          if (curEl.getAttribute(attr.name) !== attr.value) {
+            curEl.setAttribute(attr.name, attr.value);
+          }
+        });
       }
     });
   }

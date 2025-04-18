@@ -65,24 +65,63 @@ const controlServings = function (newServings) {
   recipeView.update(model.state.recipe);
 };
 
+// UNIFIED BOOKMARK UPDATE FUNCTION
+const updateAllBookmarkViews = function () {
+  // 1) Update recipe view if a recipe is loaded
+  if (model.state.recipe.id) {
+    recipeView.update(model.state.recipe);
+  }
+
+  // 2) Update search results to reflect bookmark changes
+  if (model.state.search.results.length > 0) {
+    resultsView.render(model.getSearchResultsPage());
+  }
+
+  // 3) Update bookmarks view
+  bookmarksView.render(model.state.bookmarks);
+};
+
 const controlAddBookmark = function () {
-  // Add/remove bookmark based on current state
+  // 1) Add/remove bookmark based on current state
   if (!model.state.recipe.bookmarked) {
     model.addBookmark(model.state.recipe);
   } else {
     model.deleteBookmark(model.state.recipe.id);
   }
 
-  // Update recipe view to show bookmarked status
-  recipeView.update(model.state.recipe);
+  // 2) Update all views to show current bookmark state
+  updateAllBookmarkViews();
+};
 
-  // Update search results to highlight bookmarked recipes
-  if (model.state.search.results.length > 0) {
-    resultsView.update(model.getSearchResultsPage());
+const controlSearchResultBookmark = function (id) {
+  // Find the recipe in search results
+  const recipe = model.state.search.results.find((res) => res.id === id);
+
+  if (!recipe) return;
+
+  // Toggle bookmark status
+  if (!recipe.bookmarked) {
+    // Need to load full recipe data first if not already loaded
+    if (model.state.recipe.id !== id) {
+      // Create a minimal recipe object with the data we have
+      const minimalRecipe = {
+        id: recipe.id,
+        title: recipe.title,
+        publisher: recipe.publisher,
+        image: recipe.image,
+        bookmarked: true,
+      };
+      model.addBookmark(minimalRecipe);
+    } else {
+      // If current recipe, use full data
+      model.addBookmark(model.state.recipe);
+    }
+  } else {
+    model.deleteBookmark(id);
   }
 
-  // Render bookmarks
-  bookmarksView.render(model.state.bookmarks);
+  // Update all views to show current bookmark state
+  updateAllBookmarkViews();
 };
 
 const controlBookmarks = function () {
@@ -90,20 +129,29 @@ const controlBookmarks = function () {
 };
 
 const controlClearBookmarks = function () {
+  // Clear all bookmarks
   model.clearBookmarks();
 
-  // Update recipe view if a recipe is loaded
-  if (model.state.recipe.id) {
-    recipeView.update(model.state.recipe);
-  }
+  // Update all views to show cleared bookmark state
+  updateAllBookmarkViews();
 
-  // Update search results to remove bookmark highlights
-  if (model.state.search.results.length > 0) {
-    resultsView.update(model.getSearchResultsPage());
-  }
+  // // Bonus: Show confirmation message
+  // bookmarksView._parentElement.insertAdjacentHTML(
+  //   "beforeend",
+  //   `<div class="message">
+  //     <div>
+  //       <svg>
+  //         <use href="../img/icons.svg#icon-smile"></use>
+  //       </svg>
+  //     </div>
+  //     <p>All bookmarks cleared!</p>
+  //   </div>`
+  // );
 
-  // Render empty bookmarks
-  bookmarksView.render(model.state.bookmarks);
+  // Remove the message after 2 seconds
+  setTimeout(() => {
+    bookmarksView.render(model.state.bookmarks);
+  }, 2000);
 };
 
 const controlSearchResults = async function () {
@@ -174,6 +222,7 @@ const init = () => {
   recipeView.addHandlerRender(controlRecipe);
   recipeView.addHandlerUpdateServings(controlServings);
   recipeView.addHandlerAddBookmark(controlAddBookmark);
+  resultsView.addHandlerBookmark(controlSearchResultBookmark);
   bookmarksView.addHandlerDeleteAll(controlClearBookmarks);
   searchView.addHandlerSearch(controlSearchResults);
   paginationView.addHandlerClick(controlPagination);

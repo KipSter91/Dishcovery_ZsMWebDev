@@ -9,6 +9,7 @@ class ResultsView extends View {
   _generateMarkup() {
     return this._data.reduce(this._generateMarkupPreview.bind(this), "");
   }
+
   _generateMarkupPreview(acc, pre) {
     const id = window.location.hash.slice(1);
 
@@ -20,23 +21,39 @@ class ResultsView extends View {
         }" href="#${pre.id}">
           <figure class="preview__fig">
             <img src=${pre.image} alt="Image of ${pre.title}"/>
-            ${
-              pre.bookmarked
-                ? `<div class="preview__bookmark-indicator">
-                <svg>
-                  <use href="${icons}#icon-bookmark"></use>
-                </svg>
-              </div>`
-                : ""
-            }
           </figure>
           <div class="preview__data">
             <h4 class="preview__title">${pre.title}</h4>
             <p class="preview__publisher">${pre.publisher}</p>
           </div>
+          <button class="preview__bookmark-btn">
+            <svg>
+              <use href="${icons}#icon-bookmark${
+        pre.bookmarked ? "-fill" : ""
+      }"></use>
+            </svg>
+          </button>
         </a>
       </li>`
     );
+  }
+
+  // Add handler for bookmark buttons in search results
+  addHandlerBookmark(handler) {
+    this._parentElement.addEventListener("click", function (e) {
+      const btn = e.target.closest(".preview__bookmark-btn");
+      if (!btn) return;
+      e.preventDefault(); // Prevent navigation when clicking the bookmark button
+
+      // Get the recipe id from the parent preview element
+      const previewEl = btn.closest(".preview");
+      const id = previewEl
+        .querySelector(".preview__link")
+        .getAttribute("href")
+        .slice(1);
+
+      handler(id);
+    });
   }
 }
 

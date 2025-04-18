@@ -8,7 +8,8 @@ class BookmarksView extends View {
 
   // Add handler for the "Delete All" button click
   addHandlerDeleteAll(handler) {
-    this._parentElement.addEventListener("click", function (e) {
+    // Using event delegation with document to ensure it works even after re-rendering
+    document.querySelector(".nav").addEventListener("click", function (e) {
       const btn = e.target.closest(".btn--delete-all");
       if (!btn) return;
       handler();
