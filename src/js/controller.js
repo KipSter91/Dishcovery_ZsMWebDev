@@ -18,6 +18,31 @@ const searchResultsEl = document.querySelector(".search-results");
 const containerEl = document.querySelector(".container");
 let hasInteracted = false;
 
+// Helper function to check if device is mobile (small screen)
+const isMobileDevice = function () {
+  return window.innerWidth <= 600; // Using the same breakpoint as in navigationView
+};
+
+// Helper function to scroll to recipe div smoothly
+const scrollToRecipe = function () {
+  if (isMobileDevice()) {
+    const recipeElement = document.querySelector(".recipe");
+    const headerElement = document.querySelector(".header");
+
+    if (recipeElement && headerElement) {
+      // Get header height including padding
+      const headerHeight = headerElement.offsetHeight;
+
+      // Use window.scrollTo for more precise control over scroll position
+      window.scrollTo({
+        // Calculate the position where the recipe should be positioned right below the header
+        top: recipeElement.offsetTop - headerHeight,
+        behavior: "smooth",
+      });
+    }
+  }
+};
+
 const controlRecipe = async function () {
   try {
     const id = window.location.hash.replace("#", "");
@@ -51,6 +76,9 @@ const controlRecipe = async function () {
 
     // Initialize image blur handler
     recipeView.addHandlerImageBlur();
+
+    // Scroll to recipe on mobile devices
+    scrollToRecipe();
   } catch (err) {
     console.error(`☠️${err}☠️`);
     recipeView.renderError();
