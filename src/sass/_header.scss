@@ -344,6 +344,16 @@
 
   &__list {
     list-style: none;
+    max-height: 40rem;
+    overflow-y: auto;
+  }
+
+  // Delete All Bookmarks button container
+  &__delete-all {
+    padding: 1rem 2rem;
+    text-align: center;
+    border-top: 1px solid $color-grey-light-2;
+    margin-top: 0.5rem;
   }
 
   &__field {

@@ -4,6 +4,7 @@ import searchView from "./views/searchView";
 import resultsView from "./views/resultsView";
 import navigationView from "./views/navigationView";
 import paginationView from "./views/paginationView";
+import bookmarksView from "./views/bookmarksView";
 
 import "core-js/actual";
 import "regenerator-runtime/runtime.js";
@@ -34,6 +35,14 @@ const controlRecipe = async function () {
     //Rendering loader (bouncing dots)
     recipeView.renderLoader();
 
+    // Update results view to mark the selected result
+    if (model.state.search.results.length > 0) {
+      resultsView.update(model.getSearchResultsPage());
+    }
+
+    // Update bookmarks view
+    bookmarksView.update(model.state.bookmarks);
+
     // Loading recipe
     await model.loadRecipe(id);
 
@@ -46,6 +55,55 @@ const controlRecipe = async function () {
     console.error(`☠️${err}☠️`);
     recipeView.renderError();
   }
+};
+
+const controlServings = function (newServings) {
+  // Update the recipe servings in the model
+  model.updateServings(newServings);
+
+  // Update the recipe view with the new state (without reloading the whole page)
+  recipeView.update(model.state.recipe);
+};
+
+const controlAddBookmark = function () {
+  // Add/remove bookmark based on current state
+  if (!model.state.recipe.bookmarked) {
+    model.addBookmark(model.state.recipe);
+  } else {
+    model.deleteBookmark(model.state.recipe.id);
+  }
+
+  // Update recipe view to show bookmarked status
+  recipeView.update(model.state.recipe);
+
+  // Update search results to highlight bookmarked recipes
+  if (model.state.search.results.length > 0) {
+    resultsView.update(model.getSearchResultsPage());
+  }
+
+  // Render bookmarks
+  bookmarksView.render(model.state.bookmarks);
+};
+
+const controlBookmarks = function () {
+  bookmarksView.render(model.state.bookmarks);
+};
+
+const controlClearBookmarks = function () {
+  model.clearBookmarks();
+
+  // Update recipe view if a recipe is loaded
+  if (model.state.recipe.id) {
+    recipeView.update(model.state.recipe);
+  }
+
+  // Update search results to remove bookmark highlights
+  if (model.state.search.results.length > 0) {
+    resultsView.update(model.getSearchResultsPage());
+  }
+
+  // Render empty bookmarks
+  bookmarksView.render(model.state.bookmarks);
 };
 
 const controlSearchResults = async function () {
@@ -111,8 +169,12 @@ const init = () => {
   setupInitialUI();
 
   // Initialize app components
+  bookmarksView.render(model.state.bookmarks);
   navigationView.init();
   recipeView.addHandlerRender(controlRecipe);
+  recipeView.addHandlerUpdateServings(controlServings);
+  recipeView.addHandlerAddBookmark(controlAddBookmark);
+  bookmarksView.addHandlerDeleteAll(controlClearBookmarks);
   searchView.addHandlerSearch(controlSearchResults);
   paginationView.addHandlerClick(controlPagination);
 };

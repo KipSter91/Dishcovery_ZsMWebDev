@@ -36,12 +36,16 @@ class RecipeView extends View {
   <span class="recipe__info-text">servings</span>
 
   <div class="recipe__info-buttons">
-    <button class="btn--tiny btn--increase-servings">
+    <button class="btn--tiny btn--decrease-servings" data-update-to="${
+      this._data.servings - 1
+    }">
       <svg>
         <use href="${icons}#icon-minus-circle"></use>
       </svg>
     </button>
-    <button class="btn--tiny btn--increase-servings">
+    <button class="btn--tiny btn--increase-servings" data-update-to="${
+      this._data.servings + 1
+    }">
       <svg>
         <use href="${icons}#icon-plus-circle"></use>
       </svg>
@@ -50,10 +54,11 @@ class RecipeView extends View {
 </div>
 
 <div class="recipe__user-buttons">
-  
-  <button class="btn--round">
+  <button class="btn--round btn--bookmark">
     <svg class="">
-      <use href="${icons}#icon-bookmark-fill"></use>
+      <use href="${icons}#icon-bookmark${
+      this._data.bookmarked ? "-fill" : ""
+    }"></use>
     </svg>
   </button>
 </div>
@@ -110,6 +115,27 @@ ${this._data.ingredients.reduce(this._generateMarkupIngredient.bind(this), "")}
     ["hashchange", "load"].forEach((ev) =>
       window.addEventListener(ev, handler)
     );
+  }
+
+  addHandlerUpdateServings(handler) {
+    this._parentElement.addEventListener("click", (e) => {
+      const btn = e.target.closest(
+        ".btn--increase-servings, .btn--decrease-servings"
+      );
+      if (!btn) return;
+
+      // Get the new servings from data attribute
+      const updateTo = +btn.dataset.updateTo;
+      if (updateTo > 0) handler(updateTo);
+    });
+  }
+
+  addHandlerAddBookmark(handler) {
+    this._parentElement.addEventListener("click", function (e) {
+      const btn = e.target.closest(".btn--bookmark");
+      if (!btn) return;
+      handler();
+    });
   }
 
   // Add function to handle image blur toggling
