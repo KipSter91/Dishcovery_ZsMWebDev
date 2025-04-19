@@ -1,25 +1,31 @@
 # 🍳 DISHcovery
 
-> Every dish tells a story.
+> Every dish tells a story. Discover your next culinary adventure.
 
-![DISHcovery Logo](src/img/dishcovery_logo.webp)
+<div align="center">
+  <img src="src/img/dishcovery_logo.webp" alt="DISHcovery Logo" width="250">
+  
+  [![Last Updated](https://img.shields.io/badge/Last%20Updated-April%202025-blue)]()
+  [![JavaScript](https://img.shields.io/badge/JavaScript-ES6%2B-yellow)]()
+  [![MVC](https://img.shields.io/badge/Architecture-MVC-brightgreen)]()
+</div>
 
 ## 📖 Overview
 
-DISHcovery is a modern, JavaScript-based recipe search web application that enables users to browse through thousands of recipes, view detailed preparation information, and bookmark their favorite recipes. The application features a responsive design, making it usable on both mobile and desktop devices.
+Dishcovery is a modern, JavaScript-based recipe search web application that enables users to browse through thousands of recipes, view detailed preparation information, and bookmark their favorite recipes. The application features a responsive design, making it usable on both mobile and desktop devices.
 
 ## ✨ Features
 
 - **Intuitive Search**: Fast and efficient recipe search by keywords
 - **Detailed Recipe Information**:
-  - List of ingredients
-  - Preparation time
-  - Number of servings
+  - List of ingredients with quantities
+  - Preparation time and cooking temperature
+  - Number of servings with dynamic adjustment
   - Detailed cooking instructions (link to external source)
 - **Modern User Interface**:
-  - Clean, minimal design
+  - Clean, minimal design with intuitive navigation
   - Responsive layout (mobile, tablet, desktop)
-  - Animations and interactive elements
+  - Smooth animations and interactive elements
   - Interactive welcome screen with food emoji
 - **Recipe Interaction**:
   - Click on recipe images to make them sharper (removes blur effect)
@@ -32,23 +38,23 @@ DISHcovery is a modern, JavaScript-based recipe search web application that enab
 - **Search Experience**:
   - Paginated results for easy browsing
   - Visual highlighting of selected recipe in results list
-  - Error handling with descriptive messages
+  - Comprehensive error handling with descriptive messages
 
 ## 🛠️ Technologies
 
 - **JavaScript (ES6+)** - Main programming language of the application
-- **MVC Architecture** - Well-structured, maintainable code
-- **Parcel** - Modern module bundler
-- **SASS/SCSS** - Advanced styling
-- **Forkify API** - Recipe data retrieval
-- **LocalStorage API** - For persistent bookmark data
+- **MVC Architecture** - Well-structured, maintainable code organization
+- **Parcel** - Modern module bundler for optimal performance
+- **SASS/SCSS** - Advanced styling with variables and mixins
+- **Forkify API** - Recipe data retrieval and processing
+- **LocalStorage API** - For persistent bookmark data between sessions
 
 ## 🚀 Installation and Running
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/) (v12.0.0 or newer)
-- [npm](https://www.npmjs.com/) (v6.0.0 or newer)
+- [Node.js](https://nodejs.org/) (v14.0.0 or newer)
+- [npm](https://www.npmjs.com/) (v7.0.0 or newer)
 
 ### Installation Steps
 
@@ -118,17 +124,36 @@ npm run build
 ## 🧩 Project Structure
 
 ```
-index.html
-package.json
+index.html               # Main HTML structure
+package.json             # Project dependencies and scripts
 src/
-    img/               # Images and icons
-    js/
-        config.js      # Configuration constants
-        controller.js  # Main controller
-        helpers.js     # Helper functions
-        model.js       # Data model
-        views/         # View handlers
-    sass/              # Styles
+  ├── img/               # Images and icons
+  │   ├── dishcovery_logo.webp
+  │   ├── favicon.webp
+  │   └── icons.svg
+  ├── js/
+  │   ├── config.js      # Configuration constants
+  │   ├── controller.js  # Main controller (MVC)
+  │   ├── helpers.js     # Utility functions
+  │   ├── model.js       # Data model (MVC)
+  │   └── views/         # View components (MVC)
+  │       ├── bookmarksView.js
+  │       ├── navigationView.js
+  │       ├── paginationView.js
+  │       ├── recipeView.js
+  │       ├── resultsView.js
+  │       ├── searchView.js
+  │       └── View.js    # Parent view class
+  └── sass/              # Styles
+      ├── _base.scss
+      ├── _components.scss
+      ├── _header.scss
+      ├── _mixins.scss
+      ├── _preview.scss
+      ├── _recipe.scss
+      ├── _searchResults.scss
+      ├── _variables.scss
+      └── main.scss
 ```
 
 ## 🔄 API Information
@@ -137,6 +162,24 @@ The application uses the Forkify API to retrieve recipe data:
 
 - **API base URL**: `https://forkify-api.jonas.io/api/v2/recipes/`
 - **Results per page**: 10 recipes
+- **API Key**: Required for some operations (automatically configured)
+
+## 💻 Browser Compatibility
+
+DISHcovery is compatible with all modern browsers:
+
+- Chrome (latest 2 versions)
+- Firefox (latest 2 versions)
+- Safari (latest 2 versions)
+- Edge (latest 2 versions)
+
+## 🔮 Future Improvements
+
+- Add user authentication to allow personal recipe creation
+- Implement social sharing functionality
+- Add nutrition information for recipes
+- Integrate dark mode support
+- Create a mobile app version
 
 ## 🤝 Contributing
 
@@ -159,4 +202,6 @@ As per Jonas's guidelines:
 
 ---
 
-Created with ❤️ as part of The Complete JavaScript Course 2025
+<div align="center">
+  <p>Created with ❤️ | Last Updated: April 2025</p>
+</div>
