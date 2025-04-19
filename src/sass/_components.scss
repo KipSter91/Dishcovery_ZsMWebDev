@@ -1,3 +1,4 @@
+@use "sass:color";
 @use "variables" as *;
 
 %btn {
@@ -216,6 +217,243 @@
   }
 }
 
+// Welcome screen styling
+.message {
+  &--welcome {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 4rem;
+    max-width: 100%;
+    text-align: center;
+  }
+}
+
+.message__logo {
+  margin-bottom: 2rem;
+
+  .welcome-logo {
+    width: 22rem;
+    height: auto;
+  }
+}
+
+.message__emoji-row {
+  display: flex;
+  justify-content: center;
+  font-size: 4rem;
+  margin-bottom: 2rem;
+
+  span {
+    margin: 0 1rem;
+    animation: bounce 2s infinite alternate;
+
+    &:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    &:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    &:nth-child(4) {
+      animation-delay: 0.6s;
+    }
+
+    &:nth-child(5) {
+      animation-delay: 0.8s;
+    }
+  }
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-10px);
+  }
+}
+
+.welcome__heading {
+  font-size: 3.2rem;
+  font-weight: 700;
+  color: $color-primary;
+  margin-bottom: 0.5rem;
+}
+
+.welcome__subheading {
+  font-size: 2rem;
+  font-weight: 600;
+  color: $color-grey-dark-1;
+  margin-bottom: 3rem;
+}
+
+.welcome__info {
+  margin-bottom: 4rem;
+
+  p {
+    font-size: 1.8rem;
+    line-height: 1.6;
+  }
+}
+
+.welcome__popular,
+.welcome__tips {
+  width: 100%;
+  max-width: 60rem;
+  margin-bottom: 3rem;
+
+  h3 {
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: $color-grey-dark-1;
+    margin-bottom: 1.5rem;
+  }
+}
+
+.welcome__tags {
+  padding: 0 2rem 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  justify-content: center;
+}
+
+.welcome__tag {
+  background-color: rgba($color-grey-light-2, 0.5);
+  color: $color-grey-dark-1;
+  font-size: 1.3rem;
+  font-weight: 500;
+  padding: 0.7rem 1.4rem;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  transition: all 0.25s ease;
+
+  &:hover {
+    background-color: rgba($color-primary, 0.9);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba($color-primary, 0.2);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.welcome__tips-list {
+  list-style-type: none;
+  padding: 0 2rem 2rem;
+  margin: 0;
+
+  li {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-left: 3rem;
+    line-height: 1.5;
+    color: $color-grey-dark-2;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &:before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: #20bf6b;
+      font-weight: 700;
+    }
+
+    strong {
+      color: $color-grey-dark-1;
+      font-weight: 600;
+    }
+  }
+}
+
+.welcome__features {
+  padding: 0 2rem 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.welcome__feature {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.4rem;
+  color: $color-grey-dark-2;
+
+  &:hover {
+    .welcome__feature-icon {
+      transform: scale(1.2);
+    }
+  }
+}
+
+.welcome__feature-icon {
+  font-size: 2.2rem;
+  transition: transform 0.2s ease;
+}
+
+.welcome__footer {
+  text-align: center;
+  padding: 3rem 2rem;
+  margin-top: 2rem;
+  background: linear-gradient(
+    to bottom,
+    rgba($color-grey-light-1, 0.4),
+    rgba($color-grey-light-1, 0)
+  );
+  border-radius: 1rem;
+
+  p {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 2.5rem;
+    color: $color-grey-dark-1;
+    padding: 0;
+  }
+}
+
+.welcome__cta-btn {
+  background: linear-gradient(
+    120deg,
+    $color-primary 0%,
+    color.adjust($color-primary, $lightness: -10%) 100%
+  );
+  color: #fff;
+  font-size: 1.7rem;
+  font-weight: 600;
+  padding: 1.2rem 2.8rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 4px 12px rgba($color-primary, 0.2);
+  letter-spacing: 0.5px;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 15px rgba($color-primary, 0.3);
+    background: linear-gradient(
+      120deg,
+      color.adjust($color-primary, $lightness: 5%) 0%,
+      $color-primary 100%
+    );
+  }
+
+  &:active {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba($color-primary, 0.3);
+  }
+}
+
 .loader {
   display: flex;
   gap: 8px;
@@ -241,5 +479,761 @@
   to {
     transform: translateY(-10px);
     opacity: 0.6;
+  }
+}
+
+// Welcome screen styling - modern design
+.welcome {
+  max-width: 100%;
+  height: 100%;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+
+  @media only screen and (max-width: $bp-medium) {
+    padding-top: 1rem;
+  }
+
+  @media only screen and (max-width: $bp-small) {
+    padding-top: 2rem;
+  }
+
+  &__hero {
+    position: relative;
+    padding: 4rem 2rem; // Csökkentett padding
+    text-align: center;
+    overflow: hidden;
+    background: linear-gradient(
+      135deg,
+      rgba($color-primary, 0.03) 0%,
+      rgba($color-primary, 0.12) 100%
+    );
+    border-radius: 1.5rem; // Kisebb border-radius a konzisztensebb megjelenésért
+    margin-bottom: 3rem; // Csökkentett alsó térköz
+    max-width: 95rem;
+    margin-left: auto;
+    margin-right: auto;
+    min-height: 28rem; // Kisebb minimális magasság, hogy ne legyen túl nagy üres tér
+
+    @media only screen and (max-width: $bp-medium) {
+      padding: 3rem 2rem 2.5rem;
+      margin-top: 0; // Nincs felső margó
+      margin-bottom: 2rem; // Kisebb térköz, különösen mobilon
+      min-height: 24rem;
+    }
+
+    @media only screen and (max-width: $bp-small) {
+      padding: 2.5rem 1.5rem 2rem;
+      margin-bottom: 1.5rem;
+      min-height: 22rem;
+      border-radius: 1.2rem; // Visszaállítva a border-radius kissé kisebb mérettel
+    }
+  }
+
+  &__hero-shapes {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  &__shape {
+    position: absolute;
+    border-radius: 50%;
+
+    &--1 {
+      width: 15rem;
+      height: 15rem;
+      background: linear-gradient(
+        45deg,
+        $color-primary,
+        rgba($color-primary, 0.6)
+      );
+      top: -8rem;
+      right: -6rem;
+      opacity: 0.1;
+    }
+
+    &--2 {
+      width: 20rem;
+      height: 20rem;
+      background: linear-gradient(
+        135deg,
+        color.adjust($color-primary, $lightness: -10%),
+        $color-primary
+      );
+      bottom: -10rem;
+      left: -10rem;
+      opacity: 0.08;
+    }
+
+    &--3 {
+      width: 8rem;
+      height: 8rem;
+      background: linear-gradient(
+        225deg,
+        color.adjust($color-primary, $lightness: 15%),
+        $color-primary
+      );
+      top: 30%;
+      left: 15%;
+      opacity: 0.06;
+    }
+  }
+
+  &__title {
+    font-size: 4.2rem;
+    font-weight: 800;
+    color: $color-grey-dark-1;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+
+    span {
+      color: $color-primary;
+      position: relative;
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0.4rem;
+        left: 0;
+        width: 100%;
+        height: 0.4rem;
+        background-color: rgba($color-primary, 0.2);
+        z-index: -1;
+      }
+    }
+
+    @media only screen and (max-width: $bp-medium) {
+      font-size: 3.2rem;
+    }
+  }
+
+  &__subtitle {
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: $color-grey-dark-2;
+    margin-bottom: 4rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  &__search-hint {
+    position: relative;
+    z-index: 1;
+
+    svg {
+      width: 3rem;
+      height: 3rem;
+      fill: $color-primary;
+      margin-bottom: 1rem;
+      animation: bounce-gentle 2s ease-in-out infinite;
+    }
+
+    p {
+      font-size: 1.6rem;
+      color: $color-grey-dark-2;
+    }
+  }
+
+  &__content {
+    max-width: 90rem;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  &__categories {
+    margin-bottom: 5rem;
+    text-align: center;
+
+    h2 {
+      font-size: 2rem;
+      font-weight: 600;
+      color: $color-grey-dark-1;
+      margin-bottom: 2rem;
+      position: relative;
+      display: inline-block;
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: -0.8rem;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 5rem;
+        height: 0.3rem;
+        background-color: rgba($color-primary, 0.3);
+      }
+    }
+  }
+
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  &__tag {
+    background-color: #fff;
+    color: $color-grey-dark-2;
+    font-size: 1.4rem;
+    font-weight: 500;
+    padding: 0.8rem 1.8rem;
+    border-radius: 3rem;
+    border: 1px solid $color-grey-light-3;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+      background-color: $color-primary;
+      color: #fff;
+      border-color: $color-primary;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 10px rgba($color-grey-dark-1, 0.1);
+    }
+
+    &:active {
+      transform: translateY(-1px);
+    }
+  }
+
+  &__features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 4rem;
+    margin-bottom: 3rem;
+
+    @media only screen and (max-width: $bp-medium) {
+      gap: 2rem;
+    }
+  }
+
+  &__feature {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: translateY(-5px);
+
+      .welcome__feature-icon {
+        background-color: rgba($color-primary, 0.2);
+      }
+    }
+  }
+
+  &__feature-icon {
+    width: 7rem;
+    height: 7rem;
+    border-radius: 50%;
+    background-color: rgba($color-primary, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+    transition: background-color 0.3s ease;
+
+    svg {
+      width: 3rem;
+      height: 3rem;
+      fill: $color-primary;
+    }
+  }
+
+  &__feature-text {
+    h3 {
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: $color-grey-dark-1;
+      margin-bottom: 0.8rem;
+    }
+
+    p {
+      font-size: 1.4rem;
+      color: $color-grey-dark-2;
+      line-height: 1.6;
+    }
+  }
+}
+
+// Feature bounce animation
+@keyframes bounce-gentle {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+// Welcome screen styling - fun, emoji-based design
+.welcome {
+  max-width: 100%;
+  height: 100%;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+
+  @media only screen and (max-width: $bp-medium) {
+    padding-top: 0; // Eltávolítottuk a felső paddinget
+  }
+
+  @media only screen and (max-width: $bp-small) {
+    padding-top: 0; // Eltávolítottuk a felső paddinget
+  }
+
+  &__hero {
+    position: relative;
+    padding: 4rem 2rem; // Csökkentett padding
+    text-align: center;
+    overflow: hidden;
+    background: linear-gradient(
+      135deg,
+      rgba($color-primary, 0.03) 0%,
+      rgba($color-primary, 0.1) 100%
+    );
+    border-radius: 1.5rem; // Kisebb border-radius a konzisztensebb megjelenésért
+    margin-bottom: 3rem; // Csökkentett alsó térköz
+    max-width: 95rem;
+    margin-left: auto;
+    margin-right: auto;
+    min-height: 28rem; // Kisebb minimális magasság, hogy ne legyen túl nagy üres tér
+
+    @media only screen and (max-width: $bp-medium) {
+      padding: 3rem 2rem 2.5rem;
+      margin-top: 0; // Nincs felső margó
+      margin-bottom: 2rem; // Kisebb térköz, különösen mobilon
+      min-height: 24rem;
+    }
+
+    @media only screen and (max-width: $bp-small) {
+      padding: 2.5rem 1.5rem 2rem;
+      margin-bottom: 1.5rem;
+      min-height: 22rem;
+      border-radius: 1.2rem; // Visszaállítva a border-radius kissé kisebb mérettel
+    }
+  }
+
+  &__emoji-background {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  &__floating-emoji {
+    position: absolute;
+    font-size: 4rem;
+    opacity: 0.12;
+    top: -20%;
+    animation: floatDown var(--duration, 25s) ease-in-out infinite;
+    animation-delay: var(--delay, 0s);
+    left: var(--position, 20%);
+    filter: blur(1px);
+    transform: rotate(10deg);
+
+    &--reverse {
+      animation: floatUp var(--duration, 25s) ease-in-out infinite;
+      animation-delay: var(--delay, 0s);
+    }
+
+    @media only screen and (max-width: $bp-small) {
+      font-size: 3rem;
+    }
+  }
+
+  &__content-wrapper {
+    position: relative;
+    z-index: 2;
+  }
+
+  &__title {
+    font-size: 4.2rem; // Kisebb font-size, hogy jobban illeszkedjen
+    font-weight: 800;
+    color: $color-grey-dark-1;
+    margin-bottom: 1.2rem; // Kisebb térköz a címek között
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out forwards;
+
+    @media only screen and (max-width: $bp-medium) {
+      font-size: 3.2rem;
+      margin-bottom: 1rem;
+    }
+
+    @media only screen and (max-width: $bp-small) {
+      font-size: 2.8rem;
+      margin-bottom: 0.8rem;
+    }
+  }
+
+  &__highlight {
+    color: $color-primary;
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0.2rem;
+      left: 0;
+      width: 100%;
+      height: 0.4rem;
+      background-color: rgba($color-primary, 0.2);
+      z-index: -1;
+    }
+  }
+
+  &__emoji-row {
+    margin: 1.5rem auto 2rem; // Kisebb margó
+    display: flex;
+    justify-content: center;
+    opacity: 0;
+    animation: fadeIn 0.8s ease-out 0.3s forwards;
+
+    @media only screen and (max-width: $bp-medium) {
+      margin: 1.2rem auto 1.8rem;
+    }
+
+    @media only screen and (max-width: $bp-small) {
+      margin: 1rem auto 1.5rem;
+    }
+  }
+
+  &__emoji-spotlight {
+    width: 7rem; // Kisebb spotlight
+    height: 7rem;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      rgba($color-primary, 0.15) 0%,
+      rgba($color-primary, 0) 70%
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+    @media only screen and (max-width: $bp-small) {
+      width: 6rem;
+      height: 6rem;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      box-shadow: 0 0 1.5rem rgba($color-primary, 0.2);
+      animation: pulse 2s ease-in-out infinite;
+    }
+  }
+
+  &__spotlight-emoji {
+    font-size: 4rem;
+    animation: bounce 2s ease infinite;
+
+    @media only screen and (max-width: $bp-small) {
+      font-size: 3.5rem;
+    }
+  }
+
+  &__subtitle {
+    font-size: 1.7rem; // Kisebb szöveg
+    font-weight: 500;
+    color: $color-grey-dark-2;
+    margin-bottom: 2.5rem; // Kisebb térköz
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 0.5s forwards;
+
+    @media only screen and (max-width: $bp-medium) {
+      font-size: 1.6rem;
+      margin-bottom: 2rem;
+    }
+
+    @media only screen and (max-width: $bp-small) {
+      font-size: 1.5rem;
+      margin-bottom: 1.8rem;
+    }
+  }
+
+  &__search-hint {
+    position: relative;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 0.7s forwards;
+
+    p {
+      font-size: 1.5rem;
+      color: $color-grey-dark-2;
+      margin-top: 0.8rem;
+
+      @media only screen and (max-width: $bp-small) {
+        font-size: 1.4rem;
+      }
+    }
+  }
+
+  &__arrow-container {
+    display: inline-flex;
+    animation: hoverUpDown 1.5s ease-in-out infinite;
+  }
+
+  &__arrow {
+    font-size: 2.2rem;
+
+    @media only screen and (max-width: $bp-small) {
+      font-size: 2rem;
+    }
+  }
+
+  &__cards {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem; // Kisebb térköz a kártyák között
+    max-width: 95rem;
+    margin: 0 auto 2rem; // Kisebb alsó margó
+    padding: 0 1.5rem; // Kisebb oldalsó padding
+
+    @media only screen and (max-width: $bp-medium) {
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+      padding: 0 1rem;
+    }
+
+    @media only screen and (max-width: $bp-small) {
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+  }
+
+  &__card {
+    background-color: #fff;
+    border-radius: 1.2rem;
+    padding: 1.8rem; // Kisebb padding
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    @media only screen and (max-width: $bp-small) {
+      padding: 1.5rem;
+      border-radius: 0.8rem;
+    }
+
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    }
+
+    &--categories {
+      animation: fadeIn 0.8s ease-out 0.9s both;
+    }
+
+    &--feature {
+      height: 100%;
+
+      &:nth-child(1) {
+        animation: fadeIn 0.8s ease-out 1.1s both;
+      }
+
+      &:nth-child(2) {
+        animation: fadeIn 0.8s ease-out 1.3s both;
+      }
+
+      &:nth-child(3) {
+        animation: fadeIn 0.8s ease-out 1.5s both;
+      }
+    }
+  }
+
+  &__card-header {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem; // Kisebb rés
+    margin-bottom: 1.2rem; // Kisebb alsó térköz
+
+    @media only screen and (max-width: $bp-small) {
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+      font-weight: 600;
+      color: $color-grey-dark-1;
+      margin: 0;
+
+      @media only screen and (max-width: $bp-small) {
+        font-size: 1.8rem;
+      }
+    }
+
+    h3 {
+      font-size: 1.7rem;
+      font-weight: 600;
+      color: $color-grey-dark-1;
+      margin: 0;
+
+      @media only screen and (max-width: $bp-small) {
+        font-size: 1.6rem;
+      }
+    }
+  }
+
+  &__card-emoji {
+    font-size: 2.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4.5rem;
+    height: 4.5rem;
+    background-color: rgba($color-primary, 0.08);
+    border-radius: 50%;
+
+    @media only screen and (max-width: $bp-small) {
+      width: 4rem;
+      height: 4rem;
+      font-size: 2rem;
+    }
+  }
+
+  &__features-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.5rem;
+
+    @media only screen and (max-width: $bp-small) {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+  }
+
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 1rem;
+
+    @media only screen and (max-width: $bp-small) {
+      gap: 0.6rem;
+      margin-top: 0.8rem;
+    }
+  }
+
+  &__tag {
+    background-color: #fff;
+    color: $color-grey-dark-2;
+    font-size: 1.4rem;
+    font-weight: 500;
+    padding: 0.7rem 1.5rem;
+    border-radius: 10rem;
+    border: 1px solid rgba($color-primary, 0.2);
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    @media only screen and (max-width: $bp-small) {
+      font-size: 1.3rem;
+      padding: 0.6rem 1.2rem;
+    }
+
+    &:hover {
+      background-color: $color-primary;
+      color: #fff;
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 3px 10px rgba($color-primary, 0.2);
+    }
+
+    &:active {
+      transform: translateY(-1px);
+    }
+  }
+}
+
+// Animation keyframes
+@keyframes floatDown {
+  0% {
+    transform: translateY(-100%) rotate(5deg);
+  }
+  100% {
+    transform: translateY(1000%) rotate(15deg);
+  }
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(1000%) rotate(-5deg);
+  }
+  100% {
+    transform: translateY(-100%) rotate(-15deg);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hoverUpDown {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.7;
+    transform: scale(0.95);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 0.7;
+    transform: scale(0.95);
   }
 }

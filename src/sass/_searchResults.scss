@@ -1,31 +1,36 @@
 @use "variables" as *;
 
 .search-results {
-  padding: 3rem 0;
+  padding: 2rem 0; // Csökkentett padding
   display: flex;
   flex-direction: column;
-  grid-area: list; // Assign to list grid area
-  position: relative; // Add position relative to contain absolute positioned pagination
+  grid-area: list;
+  position: relative;
+
+  @media only screen and (max-width: $bp-medium) {
+    padding: 1.5rem 0 1rem; // Kisebb padding közepes méretű képernyőn
+  }
 
   @media only screen and (max-width: $bp-small) {
-    padding: 7rem 0 2rem; // Added top padding to account for fixed header
+    padding: 7rem 0 1rem; // Megnövelt felső padding a fixed header magassága miatt
   }
 
   @media only screen and (max-width: $bp-smallest) {
-    flex-grow: 1; // Allow it to grow and fill available space
-    padding-bottom: 0; // Remove bottom padding
+    flex-grow: 1;
+    padding-top: 7.5rem; // Még egy kicsit nagyobb padding a legkisebb képernyőkön
+    padding-bottom: 0;
   }
 }
 
 .results {
   list-style: none;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem; // Kisebb alsó margó
   overflow-y: auto;
-  max-height: 75vh;
+  max-height: 70vh; // Kicsit kisebb maximális magasság
 
-  // Nice scrollbar styling
+  // Scrollbar styling
   &::-webkit-scrollbar {
-    width: 8px;
+    width: 6px; // Vékonyabb scrollbar
   }
 
   &::-webkit-scrollbar-track {
@@ -34,7 +39,7 @@
 
   &::-webkit-scrollbar-thumb {
     background: $color-grey-light-3;
-    border-radius: 4px;
+    border-radius: 3px;
   }
 
   &::-webkit-scrollbar-thumb:hover {
@@ -45,26 +50,28 @@
     max-height: 50vh;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-    padding: 0 1rem;
+    gap: 0.8rem; // Kisebb gap
+    padding: 0 0.8rem; // Kisebb padding
   }
 
   @media only screen and (max-width: $bp-medium) {
     max-height: none;
+    gap: 0.6rem; // Még kisebb gap
   }
 
   @media only screen and (max-width: $bp-small) {
-    grid-template-columns: 1fr; // Back to single column on very small screens
+    grid-template-columns: 1fr;
+    padding: 0 0.5rem; // Minimális oldalirányú padding
   }
 }
 
 .pagination {
   margin-top: auto;
-  padding: 0 3.5rem;
+  padding: 0 3rem; // Kisebb padding
   display: flex;
-  justify-content: space-between; // Change back to space-between but with more padding
-  min-height: 5rem;
-  position: relative; // Position relative for absolute positioning of buttons on smaller screens
+  justify-content: space-between;
+  min-height: 4.5rem; // Kisebb minimális magasság
+  position: relative;
 
   &::after {
     content: "";
@@ -73,9 +80,9 @@
   }
 
   &__btn {
-    min-width: 12rem;
+    min-width: 10rem; // Kisebb minimális szélesség
     text-align: center;
-    margin: 0 2rem; // Add horizontal margins for better spacing
+    margin: 0 1.5rem; // Kisebb margók
     display: flex;
     align-items: center;
     justify-content: center;
@@ -88,67 +95,73 @@
     }
 
     svg {
-      flex-shrink: 0; // Prevent SVG from shrinking
+      flex-shrink: 0;
     }
 
     span {
       display: inline-block;
-      margin: 0 0.5rem; // Add some space between text and icons
+      margin: 0 0.4rem; // Kisebb margók
     }
   }
 
   &__placeholder {
-    min-width: 12rem;
+    min-width: 10rem; // Kisebb placeholder
   }
 
   @media only screen and (max-width: $bp-large) {
-    position: absolute; // Position absolutely on smaller screens
+    position: absolute;
     width: 100%;
     height: 100%;
     top: 0;
     left: 0;
-    padding: 0; // Remove padding
-    margin: 0; // Remove margin
-    pointer-events: none; // Make the container not catch clicks
-    justify-content: center; // Center for placing elements at sides
+    padding: 0;
+    margin: 0;
+    pointer-events: none;
+    justify-content: center;
     align-items: center;
     background: transparent;
     z-index: 5;
 
     &__btn {
       position: absolute;
-      min-width: auto; // Remove min-width
-      margin: 0; // Remove margin
-      padding: 1rem; // Add some padding
-      background-color: rgba(255, 255, 255, 0.7); // Semi-transparent background
-      border-radius: 50%; // Make circular
-      width: 4.5rem;
-      height: 4.5rem;
+      min-width: auto;
+      margin: 0;
+      padding: 0.8rem; // Kisebb padding
+      background-color: rgba(
+        255,
+        255,
+        255,
+        0.8
+      ); // Kicsit kevésbé átlátszó háttér
+      border-radius: 50%;
+      width: 4rem; // Kisebb gombok
+      height: 4rem;
       display: flex;
       justify-content: center;
       align-items: center;
-      pointer-events: auto; // Allow button clicks
+      pointer-events: auto;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); // Kis árnyék a jobb láthatóság érdekében
 
       span {
-        display: none; // Hide text on small screens
+        display: none; // Szöveg elrejtve kisebb képernyőn
       }
 
       &--prev {
-        left: 1rem;
+        left: 0.8rem; // Közelebb a szélekhez
       }
 
       &--next {
-        right: 1rem;
+        right: 0.8rem;
       }
 
       svg {
-        height: 2.5rem;
-        width: 2.5rem;
+        height: 2.2rem; // Kisebb ikonok
+        width: 2.2rem;
       }
     }
 
     &__placeholder {
-      display: none; // Hide placeholder on small screens
+      display: none;
     }
   }
 
@@ -161,8 +174,8 @@
 .copyright {
   color: $color-grey-dark-2;
   font-size: 1.2rem;
-  padding: 0 3.5rem;
-  margin-top: 4rem;
+  padding: 0 3rem; // Kisebb padding
+  margin-top: 3rem; // Kisebb felső margó
 
   .twitter-link:link,
   .twitter-link:visited {
@@ -170,13 +183,14 @@
   }
 
   @media only screen and (max-width: $bp-small) {
-    padding: 0 2rem;
-    margin-top: 2rem;
+    padding: 0 1.5rem;
+    margin-top: 1.5rem;
     text-align: center;
   }
 
   @media only screen and (max-width: $bp-smallest) {
-    padding: 0 2rem 2rem;
+    padding: 0 1.5rem 1.5rem;
     margin-bottom: 0;
+    font-size: 1rem; // Kisebb betűméret a legkisebb képernyőkön
   }
 }

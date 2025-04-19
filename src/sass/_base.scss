@@ -25,7 +25,7 @@ body {
   font-weight: 400;
   line-height: 1.6;
   min-height: 100vh;
-  padding: 4vw;
+  padding: 3rem; // Fix padding 4vw helyett
   @include theme-light;
 
   &.dark {
@@ -36,8 +36,12 @@ body {
   background-repeat: no-repeat;
   overflow-y: scroll; // Always show scrollbar
 
+  @media only screen and (max-width: $bp-large) {
+    padding: 2rem; // Kicsit kisebb padding nagyobb képernyőkön
+  }
+
   @media only screen and (max-width: $bp-medium) {
-    padding: 0; // Remove padding at medium breakpoint for full screen
+    padding: 0; // Mobilon nincs padding
   }
 }
 
@@ -133,5 +137,30 @@ body {
     min-height: 100vh; // Ensure it fills the viewport height
     display: flex; // Switch to flexbox for better content distribution
     flex-direction: column; // Stack elements vertically
+  }
+}
+
+.recipe {
+  grid-area: recipe;
+  padding: 2rem 0 3rem; // A felső térköz csökkentése, az alsó megtartása
+
+  // Initial state styling - add extra buffer space in initial state mode
+  .container.initial-state & {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 1rem; // Kisebb térköz az initial state-ben
+  }
+
+  // Mobilnézet beállítások
+  @media only screen and (max-width: $bp-medium) {
+    margin-top: 0; // Eltávolítottuk a felső margót teljesen
+    padding-top: 0; // Nincs szükség felső paddingre
+  }
+
+  @media only screen and (max-width: $bp-small) {
+    margin-top: 0; // Nincs margó
+    padding: 0 0 2rem; // Csak alul van padding
   }
 }

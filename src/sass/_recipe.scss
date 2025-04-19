@@ -16,13 +16,16 @@
   ///////////
   // FIGURE
   &__fig {
-    height: 32rem;
+    height: 30rem; // Csökkentettük a magasságot 32-ről
     position: relative;
-    // transform: scale(1.04) translateY(-1px);
     transform-origin: top;
 
+    @media only screen and (max-width: $bp-medium) {
+      height: 28rem; // Közbülső méret a közepes képernyőkre
+    }
+
     @media only screen and (max-width: $bp-small) {
-      height: 25rem;
+      height: 22rem; // Kisebb méret mobilra
     }
   }
 
@@ -57,14 +60,19 @@
     font-size: 3.25rem;
     text-transform: uppercase;
     width: 50%;
-    line-height: 1.95;
+    line-height: 1.95; // Növelt sormagasság a jobb térközök érdekében
     text-align: center;
+    padding: 0; // Nincs padding a címben, csak a span elemekben
+    word-spacing: 0.25rem; // Szavak közötti kicsit nagyobb térköz
 
     span {
+      display: inline; // Inline megjelenítés a törésekhez
       border-radius: 30px 10px 30px 10px;
       -webkit-box-decoration-break: clone;
       box-decoration-break: clone;
       padding: 1.3rem 2rem;
+      margin-bottom: 0.5rem; // Margó a sorok között
+      line-height: 2.5; // Nagyobb sormagasság a spanek között
       background-image: linear-gradient(
         to right bottom,
         $color-grad-1,
@@ -74,19 +82,37 @@
 
     @media only screen and (max-width: $bp-medium) {
       width: 70%;
-      font-size: 2.75rem;
+      font-size: 2.5rem; // Kisebb betűméret
+      transform: translate(-50%, 20%) skewY(-5deg); // Kisebb ferdeség
+
+      span {
+        padding: 1.2rem 1.8rem; // Kisebb padding
+        line-height: 2.3; // Kisebb sormagasság
+      }
     }
 
     @media only screen and (max-width: $bp-small) {
       width: 80%;
-      font-size: 2.25rem;
-      transform: translate(-50%, 20%) skewY(-4deg);
+      font-size: 2rem; // Még kisebb betűméret
+      transform: translate(-50%, 20%) skewY(-3deg); // Még kisebb ferdeség
+
+      span {
+        padding: 1rem 1.5rem; // Még kisebb padding
+        line-height: 2.1; // Még kisebb sormagasság
+        border-radius: 20px 8px 20px 8px; // Kisebb lekerekítés
+      }
     }
 
     @media only screen and (max-width: $bp-smallest) {
       width: 90%;
-      font-size: 2rem;
-      transform: translate(-50%, 20%) skewY(-3deg);
+      font-size: 1.8rem; // Legkisebb betűméret
+      transform: translate(-50%, 20%) skewY(-2deg); // Minimális ferdeség
+
+      span {
+        padding: 0.8rem 1.2rem; // Legkisebb padding
+        line-height: 2; // Legkisebb sormagasság
+        border-radius: 15px 6px 15px 6px; // Legkisebb lekerekítés
+      }
     }
   }
 
@@ -95,17 +121,18 @@
   &__details {
     display: flex;
     align-items: center;
-    padding: 7.5rem 8rem 3.5rem 8rem;
+    padding: 5rem 6rem 3rem; // Csökkentett padding értékek
     flex-wrap: wrap;
     justify-content: center;
-    gap: 2rem;
+    gap: 1.5rem; // Kisebb gap
 
     @media only screen and (max-width: $bp-medium) {
-      padding: 6rem 6rem 3rem;
+      padding: 4rem 4rem 2.5rem;
+      gap: 1.2rem;
     }
 
     @media only screen and (max-width: $bp-small) {
-      padding: 4rem 4rem 2rem;
+      padding: 2.5rem 2rem 2rem;
       flex-wrap: nowrap;
       justify-content: space-between;
       gap: 0.5rem;
@@ -113,16 +140,16 @@
   }
 
   &__info {
-    font-size: 1.65rem;
+    font-size: 1.6rem; // Kisebb betűméret
     text-transform: uppercase;
     display: flex;
     align-items: center;
 
     &:not(:last-child) {
-      margin-right: 4.5rem;
+      margin-right: 3.5rem; // Kisebb margó
 
       @media only screen and (max-width: $bp-medium) {
-        margin-right: 3rem;
+        margin-right: 2rem;
       }
 
       @media only screen and (max-width: $bp-small) {
@@ -131,15 +158,21 @@
     }
 
     @media only screen and (max-width: $bp-small) {
-      font-size: 1.5rem;
+      font-size: 1.4rem; // Még kisebb betűméret mobilon
     }
   }
 
   &__info-icon {
-    height: 2.35rem;
-    width: 2.35rem;
+    height: 2.2rem; // Kisebb ikon
+    width: 2.2rem;
     fill: $color-primary;
-    margin-right: 1.15rem;
+    margin-right: 1rem; // Kisebb margó
+
+    @media only screen and (max-width: $bp-small) {
+      height: 1.8rem;
+      width: 1.8rem;
+      margin-right: 0.8rem;
+    }
   }
 
   &__info-data {
@@ -149,8 +182,12 @@
 
   &__info-buttons {
     display: flex;
-    margin-left: 1.6rem;
+    margin-left: 1.2rem; // Kisebb margó
     transform: translateY(-1px);
+
+    @media only screen and (max-width: $bp-small) {
+      margin-left: 0.8rem;
+    }
   }
 
   &__user-buttons {
@@ -171,29 +208,34 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 4rem;
-    width: 4rem;
+    height: 3.8rem; // Kisebb magasság
+    width: 3.8rem; // Kisebb szélesség
     border-radius: 10rem;
 
-    margin-right: 1.75rem;
+    margin-right: 1.5rem; // Kisebb margó
 
     svg {
-      height: 2.25rem;
-      width: 2.25rem;
+      height: 2rem; // Kisebb ikon
+      width: 2rem;
       fill: $color-primary;
     }
 
     @media only screen and (max-width: $bp-small) {
       margin-right: 0.2rem;
-      height: 3.5rem;
-      width: 3.5rem;
+      height: 3.2rem;
+      width: 3.2rem;
+
+      svg {
+        height: 1.8rem;
+        width: 1.8rem;
+      }
     }
   }
 
   ///////////
   // INGREDIENTS
   &__ingredients {
-    padding: 5rem 8rem;
+    padding: 4rem 6rem; // Csökkentett padding
     font-size: 1.6rem;
     line-height: 1.4;
     background-color: $color-grey-light-2;
@@ -202,11 +244,11 @@
     align-items: center;
 
     @media only screen and (max-width: $bp-medium) {
-      padding: 4rem 6rem;
+      padding: 3.5rem 4rem;
     }
 
     @media only screen and (max-width: $bp-small) {
-      padding: 3rem 4rem;
+      padding: 2.5rem 2rem;
       font-size: 1.5rem;
     }
   }
@@ -214,12 +256,12 @@
   &__ingredient-list {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 2.5rem 3rem;
+    gap: 2rem 3rem; // Kisebb sorok közötti térköz
     list-style: none;
 
     @media only screen and (max-width: $bp-small) {
       grid-template-columns: 1fr;
-      gap: 1.5rem;
+      gap: 1.2rem;
     }
   }
 
@@ -228,12 +270,18 @@
   }
 
   &__icon {
-    height: 2rem;
-    width: 2rem;
+    height: 1.8rem; // Kisebb ikon
+    width: 1.8rem;
     fill: $color-primary;
-    margin-right: 1.1rem;
+    margin-right: 1rem; // Kisebb margó
     flex: 0 0 auto;
     margin-top: 0.1rem;
+
+    @media only screen and (max-width: $bp-small) {
+      height: 1.6rem;
+      width: 1.6rem;
+      margin-right: 0.8rem;
+    }
   }
 
   &__quantity {
@@ -244,30 +292,30 @@
   ///////////
   // DIRECTIONS
   &__directions {
-    padding: 5rem 10rem;
-    padding-bottom: 5rem;
+    padding: 4rem 8rem; // Csökkentett padding
+    padding-bottom: 4rem;
     display: flex;
     flex-direction: column;
     align-items: center;
 
     @media only screen and (max-width: $bp-medium) {
-      padding: 4rem 6rem;
+      padding: 3.5rem 4rem;
     }
 
     @media only screen and (max-width: $bp-small) {
-      padding: 3rem 4rem;
+      padding: 2.5rem 2rem;
     }
   }
 
   &__directions-text {
-    font-size: 1.7rem;
+    font-size: 1.6rem; // Kisebb betűméret
     text-align: center;
-    margin-bottom: 3.5rem;
+    margin-bottom: 3rem; // Kisebb margó
     color: $color-grey-dark-2;
 
     @media only screen and (max-width: $bp-small) {
-      font-size: 1.5rem;
-      margin-bottom: 2.5rem;
+      font-size: 1.4rem;
+      margin-bottom: 2rem;
     }
   }
 
