@@ -5,7 +5,7 @@
   "source": "index.js",
   "scripts": {
     "start": "parcel index.html",
-    "build": "parcel build index.html"
+    "build": "parcel build index.html --public-url ./"
   },
   "author": "Zsolt Márku",
   "license": "ISC",
