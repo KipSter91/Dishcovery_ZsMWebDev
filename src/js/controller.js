@@ -5,7 +5,7 @@ import resultsView from "./views/resultsView";
 import navigationView from "./views/navigationView";
 import paginationView from "./views/paginationView";
 import bookmarksView from "./views/bookmarksView";
-import icons from "url:../img/icons.svg";
+// Remove SVG import - we'll use the helper function instead
 
 import "core-js/actual";
 import "regenerator-runtime/runtime.js";
@@ -331,22 +331,26 @@ const setupInitialUI = () => {
 };
 
 // Helper function to return to the welcome page
-const returnToWelcome = function() {
+const returnToWelcome = function () {
   // Clear the URL hash to return to root URL
-  history.pushState("", document.title, window.location.pathname + window.location.search);
-  
+  history.pushState(
+    "",
+    document.title,
+    window.location.pathname + window.location.search
+  );
+
   // Reset hasInteracted state
   hasInteracted = false;
-  
+
   // Reset search field if there's any text
-  document.querySelector('.search__field').value = '';
-  
+  document.querySelector(".search__field").value = "";
+
   // Reset the model's search results
   model.state.search.results = [];
-  
+
   // Set up the welcome UI
   setupInitialUI();
-  
+
   // Render empty bookmarks view to maintain consistency
   bookmarksView.render(model.state.bookmarks);
 };
@@ -365,10 +369,12 @@ const init = () => {
   bookmarksView.addHandlerDeleteAll(controlClearBookmarks);
   searchView.addHandlerSearch(controlSearchResults);
   paginationView.addHandlerClick(controlPagination);
-  
+
   // Add click event listener to the logo to return to welcome page
-  document.querySelector('.header__logo').addEventListener('click', returnToWelcome);
-  document.querySelector('.header__logo').style.cursor = 'pointer'; // Change cursor to pointer on hover
+  document
+    .querySelector(".header__logo")
+    .addEventListener("click", returnToWelcome);
+  document.querySelector(".header__logo").style.cursor = "pointer"; // Change cursor to pointer on hover
 };
 
 init();

@@ -5,13 +5,18 @@
   "source": "index.js",
   "scripts": {
     "start": "parcel index.html",
-    "build": "parcel build index.html --public-url ./"
+    "build": "parcel build index.html --public-url ./",
+    "clean": "rimraf dist .parcel-cache",
+    "prebuild": "npm run clean"
   },
   "author": "Zsolt Márku",
   "license": "ISC",
   "devDependencies": {
     "@parcel/transformer-sass": "^2.14.4",
+    "@parcel/transformer-svg": "^2.14.4",
     "parcel": "^2.14.4",
+    "parcel-reporter-static-files-copy": "^1.5.3",
+    "rimraf": "^5.0.10",
     "svgo": "^3.3.2"
   },
   "dependencies": {

@@ -9,6 +9,11 @@ const timeout = function (s) {
   });
 };
 
+export const getIconsPath = function () {
+  // This will work in both development and production environments
+  return "static/icons.svg";
+};
+
 export const getJSON = async (url) => {
   try {
     const res = await Promise.race([fetch(url), timeout(TIMEOUT_SEC)]);

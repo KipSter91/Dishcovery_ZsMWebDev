@@ -1,5 +1,4 @@
 import View from "./View";
-import icons from "url:../../img/icons.svg";
 
 class BookmarksView extends View {
   _parentElement = document.querySelector(".bookmarks__list");
@@ -17,6 +16,9 @@ class BookmarksView extends View {
   }
 
   _generateMarkup() {
+    // Get SVG path from parent class helper method
+    const iconPath = this._getSvgPath();
+
     return this._data.length
       ? this._data.reduce(this._generateMarkupPreview.bind(this), "") +
           `<div class="bookmarks__delete-all">
@@ -25,7 +27,7 @@ class BookmarksView extends View {
       : `<div class="message">
           <div>
             <svg>
-              <use href="${icons}#icon-smile"></use>
+              <use href="${iconPath}#icon-smile"></use>
             </svg>
           </div>
           <p>

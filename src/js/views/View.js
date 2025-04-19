@@ -1,7 +1,13 @@
-import icons from "url:../../img/icons.svg";
+import { getIconsPath } from "../helpers";
 
 export default class View {
   _data;
+
+  // Hardcoded SVG path that will work in both dev and production
+  _getSvgPath() {
+    // This works in both dev and production because Parcel correctly handles the path
+    return "icons.svg";
+  }
 
   _clear() {
     this._parentElement.innerHTML = "";
@@ -69,7 +75,7 @@ export default class View {
     <div class="message">
     <div>
     <svg>
-    <use href="${icons}#icon-smile"></use>
+    <use href="${this._getSvgPath()}#icon-smile"></use>
     </svg>
     </div>
     <p>${message}</p>
@@ -83,7 +89,7 @@ export default class View {
     <div class="error">
     <div>
     <svg>
-    <use href="${icons}#icon-alert-triangle"></use>
+    <use href="${this._getSvgPath()}#icon-alert-triangle"></use>
     </svg>
     </div>
     <p>${message}</p>

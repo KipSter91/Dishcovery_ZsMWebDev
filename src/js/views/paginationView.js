@@ -1,5 +1,4 @@
 import View from "./View";
-import icons from "url:../../img/icons.svg";
 
 class PaginationView extends View {
   _parentElement = document.querySelector(".pagination");
@@ -38,12 +37,15 @@ class PaginationView extends View {
   }
 
   _createPrevButton(page) {
+    // Get SVG path from parent class helper method
+    const iconPath = this._getSvgPath();
+
     return `
       <button data-goto="${
         page - 1
       }" class="btn--inline pagination__btn--prev pagination__btn">
         <svg class="search__icon">
-          <use href="${icons}#icon-arrow-left"></use>
+          <use href="${iconPath}#icon-arrow-left"></use>
         </svg>
         <span>Page ${page - 1}</span>
       </button>
@@ -51,13 +53,16 @@ class PaginationView extends View {
   }
 
   _createNextButton(page) {
+    // Get SVG path from parent class helper method
+    const iconPath = this._getSvgPath();
+
     return `
       <button data-goto="${
         page + 1
       }" class="btn--inline pagination__btn--next pagination__btn">
         <span>Page ${page + 1}</span>
         <svg class="search__icon">
-          <use href="${icons}#icon-arrow-right"></use>
+          <use href="${iconPath}#icon-arrow-right"></use>
         </svg>
       </button>
     `;

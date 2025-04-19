@@ -1,5 +1,4 @@
 import View from "./View";
-import icons from "url:../../img/icons.svg";
 
 class ResultsView extends View {
   _parentElement = document.querySelector(".results");
@@ -12,6 +11,8 @@ class ResultsView extends View {
 
   _generateMarkupPreview(acc, pre) {
     const id = window.location.hash.slice(1);
+    // Get SVG path from parent class helper method
+    const iconPath = this._getSvgPath();
 
     return (
       acc +
@@ -28,7 +29,7 @@ class ResultsView extends View {
           </div>
           <button class="preview__bookmark-btn">
             <svg>
-              <use href="${icons}#icon-bookmark${
+              <use href="${iconPath}#icon-bookmark${
         pre.bookmarked ? "-fill" : ""
       }"></use>
             </svg>

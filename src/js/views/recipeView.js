@@ -1,5 +1,4 @@
 import View from "./View";
-import icons from "url:../../img/icons.svg";
 import fracty from "fracty";
 
 class RecipeView extends View {
@@ -8,6 +7,9 @@ class RecipeView extends View {
   _successMessage = "";
 
   _generateMarkup() {
+    // Get SVG path from parent class helper method
+    const iconPath = this._getSvgPath();
+
     return `
     <figure class="recipe__fig">
 <img src="${this._data.image}" alt="${this._data.title}" class="recipe__img" />
@@ -19,7 +21,7 @@ class RecipeView extends View {
 <div class="recipe__details">
 <div class="recipe__info">
   <svg class="recipe__info-icon">
-    <use href="${icons}#icon-clock"></use>
+    <use href="${iconPath}#icon-clock"></use>
   </svg>
   <span class="recipe__info-data recipe__info-data--minutes">${
     this._data.cookingTime
@@ -28,7 +30,7 @@ class RecipeView extends View {
 </div>
 <div class="recipe__info">
   <svg class="recipe__info-icon">
-    <use href="${icons}#icon-users"></use>
+    <use href="${iconPath}#icon-users"></use>
   </svg>
   <span class="recipe__info-data recipe__info-data--people">${
     this._data.servings
@@ -40,14 +42,14 @@ class RecipeView extends View {
       this._data.servings - 1
     }">
       <svg>
-        <use href="${icons}#icon-minus-circle"></use>
+        <use href="${iconPath}#icon-minus-circle"></use>
       </svg>
     </button>
     <button class="btn--tiny btn--increase-servings" data-update-to="${
       this._data.servings + 1
     }">
       <svg>
-        <use href="${icons}#icon-plus-circle"></use>
+        <use href="${iconPath}#icon-plus-circle"></use>
       </svg>
     </button>
   </div>
@@ -56,7 +58,7 @@ class RecipeView extends View {
 <div class="recipe__user-buttons">
   <button class="btn--round btn--bookmark">
     <svg class="">
-      <use href="${icons}#icon-bookmark${
+      <use href="${iconPath}#icon-bookmark${
       this._data.bookmarked ? "-fill" : ""
     }"></use>
     </svg>
@@ -87,18 +89,21 @@ ${this._data.ingredients.reduce(this._generateMarkupIngredient.bind(this), "")}
 >
   <span>Directions</span>
   <svg class="search__icon">
-    <use href="${icons}#icon-arrow-right"></use>
+    <use href="${iconPath}#icon-arrow-right"></use>
   </svg>
 </a>
 </div>
     `;
   }
   _generateMarkupIngredient(acc, ingr) {
+    // Get SVG path from parent class helper method
+    const iconPath = this._getSvgPath();
+
     return (
       acc +
       `<li class="recipe__ingredient">
                     <svg class="recipe__icon">
-                    <use href="${icons}#icon-check"></use>
+                    <use href="${iconPath}#icon-check"></use>
                     </svg>
                       <div class="recipe__quantity">${
                         ingr.quantity ? fracty(ingr.quantity) : ""

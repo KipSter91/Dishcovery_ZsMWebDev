@@ -1,0 +1,19 @@
+{
+  "extends": "@parcel/config-default",
+  "reporters": [
+    "...",
+    "parcel-reporter-static-files-copy"
+  ],
+  "transformers": {
+    "*.svg": [
+      "...",
+      "@parcel/transformer-svg"
+    ]
+  },
+  "namers": [
+    "@parcel/namer-default"
+  ],
+  "optimizers": {
+    "*.svg": []
+  }
+}
